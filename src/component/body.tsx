@@ -27,16 +27,16 @@ export default function Body() {
   },[items])
 
   async function fetchData() {
-    let result = await fetch("https://api.artic.edu/api/v1/artworks?page="+pageNum);
+    let result:any = await fetch("https://api.artic.edu/api/v1/artworks?page="+pageNum);
     result = await result.json();
     setItems(result.data);
   }
 
-  function selecting(e) {
+  function selecting(e:any) {
     setSelectedProducts(e.value);
   }
   
-   function handleRowClick(e){
+   function handleRowClick(e:any){
       const id = e.data['id']
       
       for(let i=0;i<items.length;i++){
@@ -49,7 +49,7 @@ export default function Body() {
       
    }
 
-    const onPageChange = (event) => {
+    const onPageChange = (event:any) => {
         setFirst(event.first);
         setPageNum(event['page']+1)
     };
@@ -58,7 +58,7 @@ export default function Body() {
       // console.log('showing')
       if(digit>0){
         const selectedRows = items.slice(0, digit); 
-        setSelectedProducts((pre)=>{
+        setSelectedProducts((pre:any)=>{
             if(pre!==null){
               return [...pre,...selectedRows];
 
@@ -108,7 +108,7 @@ export default function Body() {
       </DataTable>
       <Paginator first={first} rows={12} totalRecords={60} onPageChange={onPageChange} style={{outline:"none"}}/>
       {show&&<div style={{display:'flex',gap:'1rem',flexDirection:'column',boxShadow:'0px 0px 7px -3px',position:'absolute',top:"3rem",left:"4.5rem",zIndex:'1',background:'white',padding:'10px 15px',borderRadius:'10px'}}>
-        <input id='numImp' style={{width:"7rem"}} type="text" value={num} onChange={(e)=>setNum(e.target.value)} placeholder="Enter no. of rows" autoComplete="off"/>
+        <input style={{width:"7rem"}} type="text" value={num} onChange={(e:any)=>setNum(e.target.value)} placeholder="Enter no. of rows" autoComplete="off"/>
         <button onClick={showNumber}>submit</button>
       </div>}
     </div>
